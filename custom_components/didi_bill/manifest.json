@@ -6,5 +6,8 @@
   "dependencies": [],
   "codeowners": ["@chaosl1996"],
   "requirements": ["requests"],
-  "config_flow": true
+  "config_flow": true,
+  "integration_manifest": {
+    "logo": "https://raw.githubusercontent.com/chaosl1996/hass-didi-bill/main/icon.png"
+  }
 }
