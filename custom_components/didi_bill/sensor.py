@@ -5,8 +5,7 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, CoordinatorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.config_entries import ConfigEntryState
-
+from homeassistant.const import CURRENCY_YUAN
 
 from .const import DOMAIN, CONF_API_URL, CONF_UPDATE_INTERVAL
 
@@ -18,11 +17,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     update_interval = timedelta(minutes=entry.data.get(CONF_UPDATE_INTERVAL, 30))
 
     coordinator = DiDiBillCoordinator(hass, api_url, update_interval)
-    if coordinator.config_entry.state == ConfigEntryState.SETUP_IN_PROGRESS:
-        await coordinator.async_config_entry_first_refresh()
-    else:
-        await coordinator.async_request_refresh()
 
+    # **修正错误的 `ConfigEntryState` 逻辑**
+    await coordinator.async_config_entry_first_refresh()
 
     async_add_entities([DiDiBillSensor(coordinator)], True)
 
@@ -57,9 +54,11 @@ class DiDiBillSensor(CoordinatorEntity, Entity):
         """初始化"""
         super().__init__(coordinator)
         self._attr_name = "滴滴账单"
+        self._attr_native_unit_of_measurement = CURRENCY_YUAN  # 设置单位
+        self._attr_device_class = "monetary"  # 货币类别
 
     @property
-    def state(self):
+    def native_value(self):
         """返回账单金额"""
         return self.coordinator.data.get("cost")
 
