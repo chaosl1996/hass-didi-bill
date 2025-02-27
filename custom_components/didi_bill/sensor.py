@@ -5,7 +5,6 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, CoordinatorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.const import CURRENCY_YUAN
 
 from .const import DOMAIN, CONF_API_URL, CONF_UPDATE_INTERVAL
 
@@ -17,11 +16,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     update_interval = timedelta(minutes=entry.data.get(CONF_UPDATE_INTERVAL, 30))
 
     coordinator = DiDiBillCoordinator(hass, api_url, update_interval)
-
-    # **修正错误的 `ConfigEntryState` 逻辑**
     await coordinator.async_config_entry_first_refresh()
 
-    async_add_entities([DiDiBillSensor(coordinator)], True)
+    async_add_entities([DiDiBillSensor(coordinator, entry)], True)
 
 class DiDiBillCoordinator(DataUpdateCoordinator):
     """管理数据更新"""
@@ -36,6 +33,7 @@ class DiDiBillCoordinator(DataUpdateCoordinator):
         try:
             response = await self.hass.async_add_executor_job(requests.get, self.api_url)
             data = response.json().get("data", {})
+
             return {
                 "cost": data.get("travel_cost", 0) / 100,  # 分 -> 元
                 "count": data.get("travel_count", 0),
@@ -50,15 +48,16 @@ class DiDiBillCoordinator(DataUpdateCoordinator):
 class DiDiBillSensor(CoordinatorEntity, Entity):
     """滴滴账单传感器"""
 
-    def __init__(self, coordinator):
+    def __init__(self, coordinator, entry):
         """初始化"""
         super().__init__(coordinator)
         self._attr_name = "滴滴账单"
-        self._attr_native_unit_of_measurement = CURRENCY_YUAN  # 设置单位
-        self._attr_device_class = "monetary"  # 货币类别
+        self._attr_unique_id = f"didi_bill_{entry.entry_id}"  # 确保 UI 可管理
+        self._attr_unit_of_measurement = "CNY"
+        self._attr_icon = "mdi:currency-cny"
 
     @property
-    def native_value(self):
+    def state(self):
         """返回账单金额"""
         return self.coordinator.data.get("cost")
 
