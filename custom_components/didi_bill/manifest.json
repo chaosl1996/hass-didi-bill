@@ -7,7 +7,6 @@
   "codeowners": ["@chaosl1996"],
   "requirements": ["requests"],
   "config_flow": true,
-  "integration_manifest": {
-    "logo": "https://github.com/chaosl1996/hass-didi-bill/blob/main/icon.png"
-  }
+  "iot_class": "cloud_polling",
+  "logo": "https://raw.githubusercontent.com/chaosl1996/hass-didi-bill/main/icon.png"
 }
