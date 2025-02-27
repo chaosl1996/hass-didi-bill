@@ -8,6 +8,6 @@
   "requirements": ["requests"],
   "config_flow": true,
   "integration_manifest": {
-    "logo": "https://raw.githubusercontent.com/chaosl1996/hass-didi-bill/main/icon.png"
+    "logo": "https://github.com/chaosl1996/hass-didi-bill/blob/main/icon.png"
   }
 }
