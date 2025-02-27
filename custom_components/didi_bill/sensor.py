@@ -5,6 +5,8 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, CoordinatorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.config_entries import ConfigEntryState
+
 
 from .const import DOMAIN, CONF_API_URL, CONF_UPDATE_INTERVAL
 
