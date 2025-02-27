@@ -1,42 +1,25 @@
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.core import callback
+from homeassistant.core import HomeAssistant
+from .const import DOMAIN, CONF_API_URL, CONF_UPDATE_INTERVAL
 
-DOMAIN = "didi_bill"
-
-class DidiBillConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """DiDi Bill 配置 UI"""
+class DiDiBillConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """滴滴账单配置流"""
 
     async def async_step_user(self, user_input=None):
-        """用户输入 URL 进行配置"""
+        """UI 配置界面"""
+        errors = {}
+
         if user_input is not None:
-            return self.async_create_entry(title="DiDi Bill", data=user_input)
+            return self.async_create_entry(title="滴滴账单", data=user_input)
 
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema({
-                vol.Required("api_url"): str
-            })
-        )
-
-    @staticmethod
-    @callback
-    def async_get_options_flow(entry):
-        return DidiBillOptionsFlowHandler(entry)
-
-class DidiBillOptionsFlowHandler(config_entries.OptionsFlow):
-    """DiDi Bill 配置选项"""
-    def __init__(self, entry):
-        self.entry = entry
-
-    async def async_step_init(self, user_input=None):
-        """允许修改 URL"""
-        if user_input is not None:
-            return self.async_create_entry(title="", data=user_input)
-
-        return self.async_show_form(
-            step_id="init",
-            data_schema=vol.Schema({
-                vol.Required("api_url", default=self.entry.options.get("api_url", "")): str
-            })
+            data_schema=vol.Schema(
+                {
+                    vol.Required(CONF_API_URL): str,
+                    vol.Optional(CONF_UPDATE_INTERVAL, default=30): int,
+                }
+            ),
+            errors=errors,
         )
