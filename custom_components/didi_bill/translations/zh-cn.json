@@ -1,0 +1,14 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "配置滴滴账单",
+        "description": "请输入 API 地址",
+        "data": {
+          "api_url": "API 地址",
+          "update_interval": "更新间隔（分钟）"
+        }
+      }
+    }
+  }
+}
