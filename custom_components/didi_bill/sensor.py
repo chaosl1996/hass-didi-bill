@@ -16,7 +16,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     update_interval = timedelta(minutes=entry.data.get(CONF_UPDATE_INTERVAL, 30))
 
     coordinator = DiDiBillCoordinator(hass, api_url, update_interval)
-    await coordinator.async_config_entry_first_refresh()
+    if coordinator.config_entry.state == ConfigEntryState.SETUP_IN_PROGRESS:
+        await coordinator.async_config_entry_first_refresh()
+    else:
+        await coordinator.async_request_refresh()
+
 
     async_add_entities([DiDiBillSensor(coordinator)], True)
 
