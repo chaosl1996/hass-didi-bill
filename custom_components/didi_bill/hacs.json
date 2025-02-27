@@ -1,0 +1,9 @@
+{
+  "name": "DiDi Bill",
+  "domain": "didi_bill",
+  "homeassistant": "2023.1.0",
+  "country": "CN",
+  "codeowner": ["@yourgithub"],
+  "documentation": "https://github.com/YOUR_GITHUB_USERNAME/hass-didi-bill",
+  "issue_tracker": "https://github.com/YOUR_GITHUB_USERNAME/hass-didi-bill/issues"
+}
