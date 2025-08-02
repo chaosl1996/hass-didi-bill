@@ -32,23 +32,23 @@
 > 
 > 自行登录开始抓包; 
 > 
-> ![GetImage (1).png](photo/GetImage (1).png)
+> ![GetImage (1).png](photo/GetImage(1).png)
 > 
 > 登录成功后,找到账单请求.
 > 
 > 如果无法找到,可以尝试刷新页面.
 > 
-> ![GetImage (2).png](photo/GetImage (2).png)
+> ![GetImage (2).png](photo/GetImage(2).png)
 > 
 > 获取请求地址；
 > 
-> ![GetImage (3).png](photo/GetImage (3).png)
+> ![GetImage (3).png](photo/GetImage(3).png)
 > 
 > 一般来说,在浏览器中输入该地址就会得到对应的响应json文件.可使用该操作判断url是否失效.
 > 
 > 如下图:
 > 
-> ![GetImage (4).png](photo/GetImage (4).png)
+> ![GetImage (4).png](photo/GetImage(4).png)
 >
 
 ## ⚙️ 配置参数
