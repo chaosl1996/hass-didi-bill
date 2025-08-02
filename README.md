@@ -23,6 +23,35 @@
 3. 通过【配置】->【设备与服务】添加新集成
 4. 输入有效的滴滴账单API地址
 
+## 🔧 电脑抓包
+> 点击[滴滴账单URL](https://page.udache.com/wyc-webx/wyc-monthly-report/index.html#/index)进入滴滴账单;
+> 
+> 
+> 快捷键F12或者右键选择检查进入开发人员工具界面；
+> 
+> ![GetImage.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3000b253-ad1d-4b56-ade8-1d4a6316d834/9d72eb17-ec02-4180-8761-41a15d8ddc7d/GetImage.png)
+> 
+> 自行登录开始抓包; 
+> 
+> ![GetImage (1).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3000b253-ad1d-4b56-ade8-1d4a6316d834/24e9324d-66c2-40ea-b947-8b393d6b9d59/GetImage_(1).png)
+> 
+> 登录成功后,找到账单请求.
+> 
+> 如果无法找到,可以尝试刷新页面.
+> 
+> ![GetImage (2).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3000b253-ad1d-4b56-ade8-1d4a6316d834/5f1a539f-126f-4b01-8914-e6d652de49c2/GetImage_(2).png)
+> 
+> 获取请求地址；
+> 
+> ![GetImage (3).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3000b253-ad1d-4b56-ade8-1d4a6316d834/e6097bd3-44fe-4e31-a4f6-a6b40c87b947/GetImage_(3).png)
+> 
+> 一般来说,在浏览器中输入该地址就会得到对应的响应json文件.可使用该操作判断url是否失效.
+> 
+> 如下图:
+> 
+> ![GetImage (4).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3000b253-ad1d-4b56-ade8-1d4a6316d834/3a2d88ee-59ff-4ebc-be0e-286e4104d350/GetImage_(4).png)
+>
+
 ## ⚙️ 配置参数
 | 参数名 | 类型 | 必填 | 默认值 | 说明 |
 |--------|------|------|--------|-----|
